@@ -20,6 +20,14 @@ def select_sort(li):
     """
     pass
 
+
+def insert_sort(li):
+    """
+    插入排序
+    """
+    pass
+
+
 if __name__ == "__main__":
     a = [90, 19, 29, 100, 40]
     print(bubble_sort(a))
