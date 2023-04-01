@@ -42,6 +42,10 @@ in in eht eht My is not adry ehosu eirsst
 """
 
 
+from collections import defaultdict
+from typing import List
+
+
 def func(s):
     """
     这是我的思路
@@ -60,7 +64,8 @@ def func(s):
             if not i in temp:
                 temp.append(i)
                 countDict[count] = temp
-    countDict = {k:v for k, v in sorted(countDict.items(), key=lambda item: item[0],reverse=True)}
+    countDict = {k: v for k, v in sorted(
+        countDict.items(), key=lambda item: item[0], reverse=True)}
     exportData = []
     for key, value in countDict.items():
         # 次数相同，需要按照单词长度进行升序排列
@@ -79,7 +84,8 @@ def func(s):
                 temp.append(j)
                 lenDict[jLen] = temp
         # 3. 对该字典进行升序排列
-        lenDict = {k:v for k, v in sorted(lenDict.items(), key=lambda item: item[0])}
+        lenDict = {k: v for k, v in sorted(
+            lenDict.items(), key=lambda item: item[0])}
         # 4. 对根据长度排序过的字典进行遍历，并将其写入extandData列表中
         for _, valueList in lenDict.items():
             valueList = sorted(valueList)
@@ -87,9 +93,6 @@ def func(s):
                 exportData.extend([m for _ in range(key)])
     print(" ".join(exportData))
 
-
-from typing import List
-from collections import defaultdict
 
 def func2(arr: List[str]):
     """
@@ -102,12 +105,24 @@ def func2(arr: List[str]):
     count = defaultdict(int)
     for i in arr:
         count[i] += 1
-    
-    arr.sort(key=lambda x: (-count[x], len(x), [ord(char) for char in x]))
+    arr.sort(key=lambda x: (-count[x],  len(x), [ord(char) for char in x]))
     print(" ".join(map(str, arr)))
 
+def func3(s):
+    """
+    参考别人的方法自己进行默写
+    """
+    # 1. 对每个单词按照ascii进行
+    tempS = ["".join(sorted(list(item))) for item in s.split()]
+    # 2. 统计每个单词出现的次数
+    count = defaultdict(int)
+    for item in tempS:
+        count[item] += 1
+    tempS.sort(key=lambda item: (-count[item], len(item), [ord(i) for i in item]))
+    print(" ".join(tempS))
+
+
 if __name__ == "__main__":
-    target1 = "This is an apple"
+    target1 = "My sister is in the house not in the yard"
     # in in eht eht My is not adry ehosu eirsst
-    func(target1)
-    func2(target1.split())
+    func3(target1)
