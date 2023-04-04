@@ -49,6 +49,5 @@ def func(s):
 
     
 
-
 target = "abczcccddzz"
 func(target)
