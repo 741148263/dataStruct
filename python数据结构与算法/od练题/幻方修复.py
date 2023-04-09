@@ -29,6 +29,47 @@
 3 2 9
 """
 
+"""
+n = int(input())
+matrix = [list(map(int, input().split())) for _ in range(n)]
+
+# 计算每行、每列和对角线上的数字和
+target_sum = sum(range(1, n*n+1)) // n
+
+# 判断每行和每列是否等于目标和，并记录出错的位置
+row_error, col_error = None, None
+for i in range(n):
+    row_sum, col_sum = 0, 0
+    for j in range(n):
+        row_sum += matrix[i][j]
+        col_sum += matrix[j][i]
+    if row_sum != target_sum:
+        row_error = (i, target_sum - row_sum)
+    if col_sum != target_sum:
+        col_error = (i, target_sum - col_sum)
+
+# 判断主对角线和副对角线是否等于目标和，并记录出错的位置
+diag_sum, anti_diag_sum = 0, 0
+for i in range(n):
+    diag_sum += matrix[i][i]
+    anti_diag_sum += matrix[i][n-i-1]
+if diag_sum != target_sum:
+    if not row_error or row_error[0] != col_error[0]:
+        row_error = (col_error[0], target_sum - diag_sum)
+    elif not col_error or col_error[1] != row_error[1]:
+        col_error = (row_error[1], target_sum - diag_sum)
+if anti_diag_sum != target_sum:
+    if not row_error or row_error[0] != n-col_error[0]-1:
+        row_error = (n-col_error[0]-1, target_sum - anti_diag_sum)
+    elif not col_error or col_error[1] != n-row_error[0]-1:
+        col_error = (n-row_error[0]-1, target_sum - anti_diag_sum)
+
+# 输出纠正信息
+print(row_error[0]+1, col_error[0]+1, matrix[row_error[0]][col_error[0]]+row_error[1]-col_error[1])
+print(col_error[0]+1, row_error[0]+1, matrix[row_error[0]][col_error[0]]+col_error[1]-row_error[1])
+
+"""
+
 
 def func():
     n = int(input())
