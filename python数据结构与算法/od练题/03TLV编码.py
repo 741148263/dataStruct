@@ -27,6 +27,7 @@ length表示信元value的长度，value表示信元的值，
 32 33
 """
 
+
 def func():
     tag = input()
     targetLine = input().split()
@@ -39,7 +40,8 @@ def func():
             targetLine = tempList[1:]
             continue
         else:
-            for item in tempList[3:3+lengntInt]:
+            for item in tempList[3:3 + lengntInt]:
                 print(item, end=" ")
+
 
 func()
