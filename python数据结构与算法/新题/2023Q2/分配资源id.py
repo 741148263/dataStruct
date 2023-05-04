@@ -57,3 +57,48 @@
 第四行释放1个资源ID，资源ID是1，资源池中剩余的资源ID顺序是2->3->1。
 执行以上操作后，资源池的第一个空闲资源ID是2。
 """
+
+
+class Pool:
+    def __init__(self) -> None:
+        self.poolDict = {}
+        self.size = 0
+
+    def add(self, key):
+        if key not in self.poolDict.keys():
+            self.poolDict[key] = None
+            self.size += 1
+
+    def delete(self, key):
+        if key in self.poolDict.keys():
+            del self.poolDict[key]
+            self.size -= 1
+
+    def firstKey(self):
+        for k in self.poolDict.keys():
+            return k
+
+def getResult(s, e, opList):
+    pool = Pool()
+    for i in range(start, end + 1):
+        pool.add(i)
+
+    for type, value in opList:
+        if type == 1:
+            while pool.size > 0 and value > 0:
+                pool.delete(pool.firstKey())
+                value -= 1
+        elif type == 2:
+            pool.delete(value)
+        elif type == 3:
+            if start <= value <= end:
+                pool.add(value)
+    print(pool.firstKey())
+    
+
+
+if __name__ == "__main__":
+    start, end = map(int, input().split())
+    opNum = int(input())
+    opTV = [list(map(int, input().split())) for _ in range(opNum)]
+    getResult(start, end, opTV)
